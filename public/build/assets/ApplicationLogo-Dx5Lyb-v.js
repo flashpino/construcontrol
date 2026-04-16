@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-DWSxhEaI.js";var t=e();function n(e){return(0,t.jsx)(`img`,{...e,src:`/img/logo-sf.png`,alt:`Grupo SF`,className:`object-contain ${e.className||``}`})}export{n as t};
