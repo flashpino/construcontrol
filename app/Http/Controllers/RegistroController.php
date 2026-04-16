@@ -16,6 +16,11 @@ class RegistroController extends Controller
     public function index(Request $request)
     {
         $query = Registro::with(['obra', 'usuario', 'fotos']);
+        
+        // Privacidade: Usuário só vê o dele, Admin vê tudo
+        if (auth()->user()->role !== 'admin') {
+            $query->where('usuario_id', auth()->id());
+        }
 
         if ($request->obra_id) $query->where('obra_id', $request->obra_id);
         if ($request->usuario_id) $query->where('usuario_id', $request->usuario_id);
@@ -43,6 +48,11 @@ class RegistroController extends Controller
 
     public function edit(Registro $registro)
     {
+        // Trava de segurança: só o dono ou admin edita
+        if (auth()->user()->role !== 'admin' && $registro->usuario_id !== auth()->id()) {
+            abort(403);
+        }
+
         $registro->load('fotos');
         return Inertia::render('NovoRegistro', [
             'registro' => $registro,
@@ -82,6 +92,11 @@ class RegistroController extends Controller
 
     public function update(Request $request, Registro $registro)
     {
+        // Trava de segurança: só o dono ou admin atualiza
+        if (auth()->user()->role !== 'admin' && $registro->usuario_id !== auth()->id()) {
+            abort(403);
+        }
+
         $validated = $request->validate([
             'obra_id' => 'required|exists:obras,id',
             'data' => 'required|date',
@@ -143,5 +158,30 @@ class RegistroController extends Controller
         
         $registro->delete();
         return redirect()->back()->with('success', 'Registro excluído');
+    }
+
+    public function relatorios(Request $request)
+    {
+        $query = Registro::with(['obra', 'usuario', 'fotos']);
+        
+        if (auth()->user()->role !== 'admin') {
+            $query->where('usuario_id', auth()->id());
+        }
+
+        if ($request->obra_id) $query->where('obra_id', $request->obra_id);
+        if ($request->usuario_id) $query->where('usuario_id', $request->usuario_id);
+        if ($request->data_inicio) $query->where('data', '>=', $request->data_inicio);
+        if ($request->data_fim) $query->where('data', '<=', $request->data_fim);
+        if ($request->status) $query->where('status', $request->status);
+
+        $registros = $query->latest('data')->get();
+
+        return Inertia::render('Relatorios', [
+            'registros' => $registros,
+            'filters' => $request->all(['obra_id', 'usuario_id', 'data_inicio', 'data_fim', 'status']),
+            'obras' => Obra::all(),
+            'usuarios' => \App\Models\User::all(),
+            'statusOpcoes' => StatusOpcao::all()
+        ]);
     }
 }

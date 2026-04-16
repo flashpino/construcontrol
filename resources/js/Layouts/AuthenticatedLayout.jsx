@@ -33,10 +33,17 @@ export default function AuthenticatedLayout({ header, children }) {
                                 </NavLink>
                                 <NavLink
                                     href={route('registros.index')}
-                                    active={route().current('registros.*')}
+                                    active={route().current('registros.index')}
                                     prefetch
                                 >
                                     RDO
+                                </NavLink>
+                                <NavLink
+                                    href={route('registros.relatorios')}
+                                    active={route().current('registros.relatorios')}
+                                    prefetch
+                                >
+                                    Relatórios
                                 </NavLink>
                                 
                                 {user.role === 'admin' && (
@@ -197,6 +204,12 @@ export default function AuthenticatedLayout({ header, children }) {
                         </div>
 
                         <div className="mt-3 space-y-1">
+                            <ResponsiveNavLink href={route('registros.index')} active={route().current('registros.index')}>
+                        RDO
+                    </ResponsiveNavLink>
+                    <ResponsiveNavLink href={route('registros.relatorios')} active={route().current('registros.relatorios')}>
+                        Relatórios
+                    </ResponsiveNavLink>
                             <ResponsiveNavLink href={route('profile.edit')}>
                                 Profile
                             </ResponsiveNavLink>

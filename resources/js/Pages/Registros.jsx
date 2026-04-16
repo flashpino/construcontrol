@@ -201,8 +201,17 @@ export default function Registros({ registros, obras, statusOpcoes, auth, filter
 
                         {(auth.user.role === 'admin' || auth.user.id === reg.usuario_id) && (
                           <div className="flex gap-2">
-                             {/* Delete butto logic can be added here or in detail view */}
-                             <Button onClick={() => router.delete(route('registros.destroy', reg.id))} variant="ghost" size="sm" className="rounded-xl h-9 px-4 text-[10px] font-black uppercase tracking-widest hover:bg-red-50 hover:text-red-600 transition-all">
+                             <Link href={route('registros.edit', reg.id)}>
+                               <Button variant="ghost" size="sm" className="rounded-xl h-9 px-4 text-[10px] font-black uppercase tracking-widest hover:bg-amber-50 hover:text-amber-600 transition-all">
+                                  <Edit size={14} className="mr-2" /> Editar
+                               </Button>
+                             </Link>
+                             <Button 
+                               onClick={() => confirm('Tem certeza que deseja excluir?') && router.delete(route('registros.destroy', reg.id))} 
+                               variant="ghost" 
+                               size="sm" 
+                               className="rounded-xl h-9 px-4 text-[10px] font-black uppercase tracking-widest hover:bg-red-50 hover:text-red-600 transition-all"
+                             >
                                 <Trash2 size={14} className="mr-2" /> Excluir
                              </Button>
                           </div>

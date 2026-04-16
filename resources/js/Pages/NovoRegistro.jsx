@@ -44,9 +44,8 @@ export default function NovoRegistro({ registro, obras, statusOpcoes }) {
   const { data, setData, post, processing, errors, reset } = useForm({
     obra_id: registro?.obra_id ? String(registro.obra_id) : '',
     data: registro?.data || new Date().toISOString().split('T')[0],
-    status: registro?.status || 'Normal',
-    descricao_activity: registro?.descricao_atividade || '', // Matches DB column
-    descricao_atividade: registro?.descricao_atividade || '', // Re-mapping for backend
+    status: registro?.status || '',
+    descricao_atividade: registro?.descricao_atividade || '',
     problemas_observacoes: registro?.problemas_observacoes || '',
     acao_complementar: registro?.acao_complementar == 1,
     descricao_acao_complementar: registro?.descricao_acao_complementar || '',
@@ -254,7 +253,7 @@ export default function NovoRegistro({ registro, obras, statusOpcoes }) {
                     <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Status das Atividades</label>
                     <Select value={data.status} onValueChange={(v) => setData('status', v)}>
                       <SelectTrigger>
-                        {data.status}
+                        {data.status || 'Selecione o status'}
                       </SelectTrigger>
                       <SelectContent>
                         {statusOpcoes.map((s) => (
@@ -304,7 +303,7 @@ export default function NovoRegistro({ registro, obras, statusOpcoes }) {
                     <Checkbox 
                       id="acao" 
                       checked={data.acao_complementar} 
-                      onChange={(e) => setData('acao_complementar', e.target.checked)} 
+                      onCheckedChange={(checked) => setData('acao_complementar', checked)} 
                     />
                     <label htmlFor="acao" className="text-xs font-black uppercase tracking-widest text-slate-700 cursor-pointer flex-1">
                       Houve necessidade de ação complementar?

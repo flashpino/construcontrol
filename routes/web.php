@@ -16,6 +16,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     
     Route::resource('obras', ObraController::class);
+    Route::get('registros/relatorios', [RegistroController::class, 'relatorios'])->name('registros.relatorios');
     Route::resource('registros', RegistroController::class);
     
     Route::middleware('admin')->group(function () {
