@@ -6,8 +6,10 @@
         <meta name="theme-color" content="#f59e0b">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-        <link rel="manifest" href="/manifest.json">
-        <link rel="apple-touch-icon" href="/img/icon-192.png">
+        <link rel="manifest" href="/manifest.json?v=1">
+        <link rel="apple-touch-icon" href="/img/icon-192.png?v=1">
+        <link rel="shortcut icon" href="/favicon.ico?v=1">
+        <link rel="icon" type="image/png" href="/img/icon-192.png?v=1">
 
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
