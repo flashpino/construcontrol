@@ -61,8 +61,9 @@ export default function Registros({ registros, obras, statusOpcoes, auth, filter
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <motion.div
-              initial={{ opacity: 0, y: -20 }}
+              initial={{ opacity: 0, y: -5 }}
               animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.2 }}
             >
               <div className="flex items-center gap-2 text-amber-600 mb-1">
                 <ClipboardList size={14} />
@@ -165,9 +166,9 @@ export default function Registros({ registros, obras, statusOpcoes, auth, filter
             ) : registros.map((reg, index) => (
               <motion.div
                 key={reg.id}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 5 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05 }}
+                transition={{ delay: index * 0.03, duration: 0.2 }}
               >
                 <Card className="border border-slate-200 shadow-sm rounded-3xl overflow-hidden hover:shadow-xl hover:border-amber-500/30 transition-all duration-500 group">
                   <div className="flex flex-col lg:flex-row">

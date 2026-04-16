@@ -18,7 +18,7 @@ export default function AuthenticatedLayout({ header, children }) {
                     <div className="flex h-16 justify-between">
                         <div className="flex">
                             <div className="flex shrink-0 items-center">
-                                <Link href="/">
+                                <Link href="/" prefetch>
                                     <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
                                 </Link>
                             </div>
@@ -27,12 +27,14 @@ export default function AuthenticatedLayout({ header, children }) {
                                 <NavLink
                                     href={route('dashboard')}
                                     active={route().current('dashboard')}
+                                    prefetch
                                 >
                                     Dashboard
                                 </NavLink>
                                 <NavLink
                                     href={route('registros.index')}
                                     active={route().current('registros.*')}
+                                    prefetch
                                 >
                                     RDO
                                 </NavLink>
@@ -42,12 +44,14 @@ export default function AuthenticatedLayout({ header, children }) {
                                         <NavLink
                                             href={route('obras.index')}
                                             active={route().current('obras.*')}
+                                            prefetch
                                         >
                                             Obras
                                         </NavLink>
                                         <NavLink
                                             href={route('configuracoes.index')}
                                             active={route().current('configuracoes.*')}
+                                            prefetch
                                         >
                                             Configurações
                                         </NavLink>
