@@ -46,7 +46,7 @@ export default function Dashboard({ dashboardData, period }) {
 
   const stats = [
     { name: 'Obras Ativas', value: dashboardData.totalObrasAtivas, icon: HardHat, color: 'text-blue-600', bg: 'bg-blue-50', border: 'border-blue-100' },
-    { name: 'Total de Registros', value: dashboardData.totalRegistros, icon: ClipboardList, color: 'text-amber-600', bg: 'bg-amber-50', border: 'border-amber-100' },
+    { name: 'Total de RDOs', value: dashboardData.totalRegistros, icon: ClipboardList, color: 'text-amber-600', bg: 'bg-amber-50', border: 'border-amber-100' },
     { name: 'Problemas Reportados', value: dashboardData.problemasReportados, icon: AlertTriangle, color: 'text-red-600', bg: 'bg-red-50', border: 'border-red-100' },
     { name: 'Taxa Ação Comp.', value: `${dashboardData.taxaAcaoComplementar.toFixed(1)}%`, icon: TrendingUp, color: 'text-emerald-600', bg: 'bg-emerald-50', border: 'border-emerald-100' },
   ];
@@ -127,7 +127,7 @@ export default function Dashboard({ dashboardData, period }) {
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             <Card className="lg:col-span-1 border border-slate-200 shadow-sm rounded-2xl overflow-hidden">
               <CardHeader className="bg-slate-50/50 border-b border-slate-100 py-4 px-6">
-                <CardTitle className="text-xs font-black uppercase tracking-widest text-slate-900">Registros por Status</CardTitle>
+                <CardTitle className="text-xs font-black uppercase tracking-widest text-slate-900">RDOs por Status</CardTitle>
               </CardHeader>
               <CardContent className="h-[320px] pt-6">
                 <ResponsiveContainer width="100%" height="100%">
@@ -192,7 +192,7 @@ export default function Dashboard({ dashboardData, period }) {
                     <div className="flex-1">
                       <div className="flex justify-between mb-1.5 items-end">
                         <p className="text-xs font-black uppercase tracking-wide text-slate-900">{u.username}</p>
-                        <span className="text-[10px] font-black text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full">{u.count} REGISTROS</span>
+                        <span className="text-[10px] font-black text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full">{u.count} RDOs</span>
                       </div>
                       <div className="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
                         <motion.div 

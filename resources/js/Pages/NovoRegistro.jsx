@@ -166,11 +166,11 @@ export default function NovoRegistro({ registro, obras, statusOpcoes }) {
     <AuthenticatedLayout
       header={
         <h2 className="text-xl font-semibold leading-tight text-gray-800">
-          {isEditing ? 'Editar Registro' : 'Novo Registro'}
+          {isEditing ? 'Editar RDO' : 'Novo RDO'}
         </h2>
       }
     >
-      <Head title={isEditing ? 'Editar Registro' : 'Novo Registro'} />
+      <Head title={isEditing ? 'Editar RDO' : 'Novo RDO'} />
 
       <div className="py-12 bg-slate-50/50 min-h-screen">
         <Dialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
@@ -202,7 +202,7 @@ export default function NovoRegistro({ registro, obras, statusOpcoes }) {
                   <span className="text-[10px] font-black uppercase tracking-[0.2em]">Formulário de Campo</span>
                 </div>
                 <h2 className="text-4xl font-black tracking-tighter text-slate-900 uppercase italic">
-                  {isEditing ? 'Editar' : 'Novo'} Registro<span className="text-slate-400">.</span>
+                  {isEditing ? 'Editar' : 'Novo'} RDO<span className="text-slate-400">.</span>
                 </h2>
               </div>
             </div>
@@ -398,7 +398,7 @@ export default function NovoRegistro({ registro, obras, statusOpcoes }) {
                 >
                   <div className="flex items-center gap-2">
                     <Save size={18} />
-                    <span>{isEditing ? 'Atualizar Registro' : 'Finalizar Registro'}</span>
+                    <span>{isEditing ? 'Atualizar RDO' : 'Finalizar RDO'}</span>
                   </div>
                 </Button>
 
@@ -409,7 +409,7 @@ export default function NovoRegistro({ registro, obras, statusOpcoes }) {
                     onClick={() => setShowDeleteDialog(true)}
                     className="w-full text-red-500 hover:bg-red-50 hover:text-red-600 h-14 rounded-3xl font-black uppercase tracking-widest text-[10px] transition-all"
                   >
-                    <Trash2 size={18} className="mr-2" /> Excluir Registro
+                    <Trash2 size={18} className="mr-2" /> Excluir RDO
                   </Button>
                 )}
               </div>

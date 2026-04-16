@@ -55,7 +55,7 @@ export default function Registros({ registros, obras, statusOpcoes, auth, filter
         </h2>
       }
     >
-      <Head title="Registros" />
+      <Head title="RDO" />
 
       <div className="py-12 bg-slate-50/50 min-h-screen">
         <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 space-y-8">
@@ -68,7 +68,7 @@ export default function Registros({ registros, obras, statusOpcoes, auth, filter
                 <ClipboardList size={14} />
                 <span className="text-[10px] font-black uppercase tracking-[0.2em]">Diário de Campo</span>
               </div>
-              <h2 className="text-4xl font-black tracking-tighter text-slate-900 uppercase italic">Registros<span className="text-slate-400">.</span></h2>
+              <h2 className="text-4xl font-black tracking-tighter text-slate-900 uppercase italic">RDO<span className="text-slate-400">.</span></h2>
               <p className="text-sm text-slate-500 font-medium mt-1">Acompanhamento detalhado das atividades em campo.</p>
             </motion.div>
             <div className="flex items-center gap-3">
@@ -81,7 +81,7 @@ export default function Registros({ registros, obras, statusOpcoes, auth, filter
               </Button>
               <Link href={route('registros.create')}>
                 <Button className="bg-amber-500 hover:bg-amber-600 text-slate-950 rounded-xl font-black uppercase tracking-widest text-[10px] h-11 px-6 shadow-lg shadow-amber-500/20">
-                  <Plus size={16} className="mr-2" /> Novo Registro
+                  <Plus size={16} className="mr-2" /> Novo RDO
                 </Button>
               </Link>
             </div>
@@ -160,7 +160,7 @@ export default function Registros({ registros, obras, statusOpcoes, auth, filter
             {registros.length === 0 ? (
               <div className="text-center py-32 bg-white rounded-3xl border-2 border-dashed border-slate-200 text-slate-400">
                 <ClipboardList size={48} className="mx-auto mb-4 opacity-20" />
-                <p className="text-xs font-black uppercase tracking-widest">Nenhum registro encontrado.</p>
+                <p className="text-xs font-black uppercase tracking-widest">Nenhum RDO encontrado.</p>
               </div>
             ) : registros.map((reg, index) => (
               <motion.div

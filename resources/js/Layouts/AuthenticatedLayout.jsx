@@ -34,7 +34,7 @@ export default function AuthenticatedLayout({ header, children }) {
                                     href={route('registros.index')}
                                     active={route().current('registros.*')}
                                 >
-                                    Registros
+                                    RDO
                                 </NavLink>
                                 
                                 {user.role === 'admin' && (
@@ -161,7 +161,7 @@ export default function AuthenticatedLayout({ header, children }) {
                             href={route('registros.index')}
                             active={route().current('registros.*')}
                         >
-                            Registros
+                            RDO
                         </ResponsiveNavLink>
                         
                         {user.role === 'admin' && (
