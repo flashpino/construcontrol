@@ -281,7 +281,7 @@
     ]
   },
   "resources/js/Pages/Dashboard.jsx": {
-    "file": "assets/Dashboard-mKv5MsSE.js",
+    "file": "assets/Dashboard-C1vin-IF.js",
     "name": "Dashboard",
     "src": "resources/js/Pages/Dashboard.jsx",
     "isDynamicEntry": true,
@@ -298,7 +298,7 @@
     ]
   },
   "resources/js/Pages/NovoRegistro.jsx": {
-    "file": "assets/NovoRegistro-BNqtX0Oa.js",
+    "file": "assets/NovoRegistro-Dpivrk5j.js",
     "name": "NovoRegistro",
     "src": "resources/js/Pages/NovoRegistro.jsx",
     "isDynamicEntry": true,
@@ -384,7 +384,7 @@
     ]
   },
   "resources/js/Pages/Registros.jsx": {
-    "file": "assets/Registros-BBz5uvk9.js",
+    "file": "assets/Registros-DWiGTl0e.js",
     "name": "Registros",
     "src": "resources/js/Pages/Registros.jsx",
     "isDynamicEntry": true,
@@ -429,7 +429,7 @@
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-DaOh4w4J.js",
+    "file": "assets/app-BkJ-L2wF.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
@@ -456,7 +456,7 @@
       "resources/js/Pages/Welcome.jsx"
     ],
     "css": [
-      "assets/app-DJoqZ57F.css"
+      "assets/app-zFIzUiuZ.css"
     ]
   }
 }

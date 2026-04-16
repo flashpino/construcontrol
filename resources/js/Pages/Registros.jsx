@@ -58,7 +58,7 @@ export default function Registros({ registros, obras, statusOpcoes, auth, filter
       <Head title="RDO" />
 
       <div className="py-12 bg-slate-50/50 min-h-screen">
-        <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 space-y-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <motion.div
               initial={{ opacity: 0, y: -20 }}
@@ -171,7 +171,7 @@ export default function Registros({ registros, obras, statusOpcoes, auth, filter
               >
                 <Card className="border border-slate-200 shadow-sm rounded-3xl overflow-hidden hover:shadow-xl hover:border-amber-500/30 transition-all duration-500 group">
                   <div className="flex flex-col lg:flex-row">
-                    <div className="p-8 flex-1 space-y-6">
+                    <div className="p-4 md:p-8 flex-1 space-y-6">
                       <div className="flex flex-wrap items-center justify-between gap-4">
                         <div className="flex flex-wrap items-center gap-4">
                           <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border ${

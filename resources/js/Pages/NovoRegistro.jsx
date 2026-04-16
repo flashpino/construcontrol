@@ -188,7 +188,7 @@ export default function NovoRegistro({ registro, obras, statusOpcoes }) {
           </DialogContent>
         </Dialog>
 
-        <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 space-y-8">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="flex items-center gap-4">
               <Link href={route('registros.index')}>
