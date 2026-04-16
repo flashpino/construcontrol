@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
         <meta name="theme-color" content="#f59e0b">
         <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
         <link rel="manifest" href="/manifest.json?v=1">
         <link rel="apple-touch-icon" href="/img/icon-192.png?v=1">

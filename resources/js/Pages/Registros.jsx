@@ -12,7 +12,8 @@ import {
   AlertCircle, 
   Edit, 
   Filter, 
-  ClipboardList 
+  ClipboardList,
+  Trash2
 } from 'lucide-react';
 import { Button } from '@/Components/ui/button';
 import { Input } from '@/Components/ui/input';
