@@ -46,7 +46,7 @@ export default function Relatorios({ registros, obras, usuarios, statusOpcoes, a
     });
   };
 
-  const handlePrint = () => {
+  const handleExport = () => {
     window.print();
   };
 
@@ -90,8 +90,8 @@ export default function Relatorios({ registros, obras, usuarios, statusOpcoes, a
             </motion.div>
             
             <div className="flex items-center gap-3">
-              <Button onClick={handlePrint} variant="outline" className="rounded-xl font-black uppercase tracking-widest text-[10px] h-11 px-6 border-slate-200 bg-white">
-                <Printer size={16} className="mr-2" /> Imprimir
+              <Button onClick={handleExport} variant="outline" className="rounded-xl font-black uppercase tracking-widest text-[10px] h-11 px-6 border-slate-200 bg-white hover:bg-blue-50 hover:text-blue-600 transition-all border-2">
+                <Download size={16} className="mr-2" /> Exportar PDF
               </Button>
             </div>
           </div>
