@@ -23,7 +23,7 @@ import {
   SelectItem, 
   SelectTrigger
 } from '@/Components/ui/select';
-import { Checkbox } from '@/Components/ui/checkbox';
+
 import { 
   Dialog, 
   DialogContent, 
@@ -299,11 +299,17 @@ export default function NovoRegistro({ registro, obras, statusOpcoes, acoesCompl
                   </div>
                 </CardHeader>
                 <CardContent className="p-8 space-y-6">
-                  <div className="flex items-center space-x-3 p-4 bg-slate-50 rounded-2xl border border-slate-100 cursor-pointer">
-                    <Checkbox 
-                      id="acao" 
-                      checked={data.acao_complementar} 
-                      onCheckedChange={(checked) => setData('acao_complementar', checked)} 
+                  <div 
+                    className="flex items-center space-x-3 p-4 bg-slate-50 rounded-2xl border border-slate-100 cursor-pointer"
+                    onClick={() => setData('acao_complementar', !data.acao_complementar)}
+                  >
+                    <input
+                      type="checkbox"
+                      id="acao"
+                      checked={!!data.acao_complementar}
+                      onChange={(e) => setData('acao_complementar', e.target.checked)}
+                      className="h-5 w-5 rounded accent-amber-500 cursor-pointer shrink-0"
+                      onClick={(e) => e.stopPropagation()}
                     />
                     <label htmlFor="acao" className="text-xs font-black uppercase tracking-widest text-slate-700 cursor-pointer flex-1">
                       Houve necessidade de ação complementar?

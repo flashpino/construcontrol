@@ -33,7 +33,11 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('registros.index', absolute: false));
+        $destination = auth()->user()->role === 'admin'
+            ? route('dashboard', absolute: false)
+            : route('registros.index', absolute: false);
+
+        return redirect()->intended($destination);
     }
 
     /**

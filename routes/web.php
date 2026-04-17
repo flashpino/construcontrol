@@ -13,9 +13,7 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', function () {
-        return redirect()->route('registros.index');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     
     Route::resource('obras', ObraController::class);
     Route::get('registros/relatorios', [RegistroController::class, 'relatorios'])->name('registros.relatorios');

@@ -44,6 +44,13 @@ export default function AuthenticatedLayout({ header, children }) {
                                 {user.role === 'admin' && (
                                     <>
                                         <NavLink
+                                            href={route('dashboard')}
+                                            active={route().current('dashboard')}
+                                            prefetch
+                                        >
+                                            Dashboard
+                                        </NavLink>
+                                        <NavLink
                                             href={route('obras.index')}
                                             active={route().current('obras.*')}
                                             prefetch
@@ -173,6 +180,12 @@ export default function AuthenticatedLayout({ header, children }) {
                         
                         {user.role === 'admin' && (
                             <>
+                                <ResponsiveNavLink
+                                    href={route('dashboard')}
+                                    active={route().current('dashboard')}
+                                >
+                                    Dashboard
+                                </ResponsiveNavLink>
                                 <ResponsiveNavLink
                                     href={route('obras.index')}
                                     active={route().current('obras.*')}
