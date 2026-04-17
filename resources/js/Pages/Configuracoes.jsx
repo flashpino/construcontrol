@@ -10,7 +10,8 @@ import {
   Edit, 
   Save, 
   X,
-  Palette
+  Palette,
+  Lightbulb
 } from 'lucide-react';
 import { Button } from '@/Components/ui/button';
 import { Input } from '@/Components/ui/input';
