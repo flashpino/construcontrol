@@ -31,7 +31,7 @@ export default function AuthenticatedLayout({ header, children }) {
                                 >
                                     RDO
                                 </NavLink>
-                                {auth.user.role === 'admin' && (
+                                {user.role === 'admin' && (
                                     <NavLink
                                         href={route('registros.relatorios')}
                                         active={route().current('registros.relatorios')}
