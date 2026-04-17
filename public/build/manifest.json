@@ -231,7 +231,7 @@
     ]
   },
   "resources/js/Pages/AcoesComplementares.jsx": {
-    "file": "assets/AcoesComplementares-CpAWuV6w.js",
+    "file": "assets/AcoesComplementares-_qqcvJaf.js",
     "name": "AcoesComplementares",
     "src": "resources/js/Pages/AcoesComplementares.jsx",
     "isDynamicEntry": true,
@@ -364,7 +364,7 @@
     ]
   },
   "resources/js/Pages/NovoRegistro.jsx": {
-    "file": "assets/NovoRegistro-CbLa06MA.js",
+    "file": "assets/NovoRegistro-B3i9ZRZG.js",
     "name": "NovoRegistro",
     "src": "resources/js/Pages/NovoRegistro.jsx",
     "isDynamicEntry": true,
@@ -522,7 +522,7 @@
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-CzIkLTX1.js",
+    "file": "assets/app-DylU7JTh.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
@@ -551,7 +551,7 @@
       "resources/js/Pages/Welcome.jsx"
     ],
     "css": [
-      "assets/app-BU4tb-QT.css"
+      "assets/app-Dg0GTn0_.css"
     ]
   }
 }

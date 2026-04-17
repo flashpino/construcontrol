@@ -20,14 +20,10 @@ const STATUS_OPTIONS = [
 ];
 
 function StatusBadge({ value }) {
-  const opt = STATUS_OPTIONS.find(s => s.value === value);
-  if (!opt) {
-    return (
-      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-slate-200 text-[10px] font-black uppercase tracking-widest text-slate-400 bg-slate-50">
-        <Clock size={10} /> Pendente
-      </span>
-    );
-  }
+  // Normaliza null/undefined para 'pendente'
+  const resolved = value || 'pendente';
+  const opt = STATUS_OPTIONS.find(s => s.value === resolved);
+  if (!opt) return null;
   const { label, color, Icon } = opt;
   return (
     <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-[10px] font-black uppercase tracking-widest ${color}`}>

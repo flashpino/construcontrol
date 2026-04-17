@@ -383,16 +383,31 @@ export default function NovoRegistro({ registro, obras, statusOpcoes }) {
                           </button>
                         </div>
                       ))}
-                      <label className="aspect-square rounded-3xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center gap-3 cursor-pointer hover:bg-slate-50 hover:border-amber-500 hover:text-amber-500 transition-all text-slate-400 group">
-                        <Camera size={20} />
-                        <span className="text-[10px] font-black uppercase tracking-widest text-center px-2">Adicionar Fotos</span>
-                        <input 
-                          type="file" 
-                          multiple 
-                          accept="image/*" 
+
+                      {/* Câmera */}
+                      <label className="aspect-square rounded-3xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center gap-2 cursor-pointer hover:bg-amber-50 hover:border-amber-400 transition-all text-slate-400 hover:text-amber-500 group">
+                        <Camera size={22} />
+                        <span className="text-[9px] font-black uppercase tracking-widest text-center px-2 leading-tight">Câmera</span>
+                        <input
+                          type="file"
+                          multiple
+                          accept="image/*"
                           capture="environment"
-                          className="hidden" 
-                          onChange={handleFileChange} 
+                          className="hidden"
+                          onChange={handleFileChange}
+                        />
+                      </label>
+
+                      {/* Galeria */}
+                      <label className="aspect-square rounded-3xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center gap-2 cursor-pointer hover:bg-blue-50 hover:border-blue-400 transition-all text-slate-400 hover:text-blue-500 group">
+                        <ImageIcon size={22} />
+                        <span className="text-[9px] font-black uppercase tracking-widest text-center px-2 leading-tight">Galeria</span>
+                        <input
+                          type="file"
+                          multiple
+                          accept="image/*"
+                          className="hidden"
+                          onChange={handleFileChange}
                         />
                       </label>
                     </div>
