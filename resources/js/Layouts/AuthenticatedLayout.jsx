@@ -3,13 +3,23 @@ import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link, usePage } from '@inertiajs/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { Toaster, toast } from 'sonner';
 
 export default function AuthenticatedLayout({ header, children }) {
     const user = usePage().props.auth.user;
+    const { flash } = usePage().props;
 
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
+
+    // Converte flash messages do Laravel em toasts visíveis
+    useEffect(() => {
+        if (flash?.success) toast.success(flash.success);
+        if (flash?.error)   toast.error(flash.error);
+        if (flash?.warning) toast.warning(flash.warning);
+        if (flash?.info)    toast.info(flash.info);
+    }, [flash]);
 
     return (
         <div className="min-h-screen bg-gray-100">
@@ -257,6 +267,21 @@ export default function AuthenticatedLayout({ header, children }) {
             )}
 
             <main>{children}</main>
+
+            <Toaster
+                position="top-right"
+                richColors
+                expand
+                closeButton
+                toastOptions={{
+                    style: {
+                        fontFamily: 'inherit',
+                        fontSize: '13px',
+                        fontWeight: '700',
+                        borderRadius: '16px',
+                    },
+                }}
+            />
         </div>
     );
 }

@@ -142,11 +142,15 @@ export default function NovoRegistro({ registro, obras, statusOpcoes }) {
     e.preventDefault();
     const url = isEditing ? route('registros.update', registro.id) : route('registros.store');
     
+    const toastId = toast.loading(isEditing ? 'Atualizando registro...' : 'Salvando registro...');
+
     post(url, {
       onSuccess: () => {
+        toast.dismiss(toastId);
         toast.success(isEditing ? 'Registro atualizado!' : 'Registro salvo!');
       },
       onError: (err) => {
+        toast.dismiss(toastId);
         console.error(err);
         toast.error('Erro ao salvar registro. Verifique os campos.');
       }

@@ -51,19 +51,32 @@ export default function AcoesComplementares({ registros_com_acoes }) {
   };
 
   const handleUpdate = (id) => {
+    const toastId = toast.loading('Atualizando status...');
     editForm.put(route('acoes-complementares.update', id), {
       onSuccess: () => {
+        toast.dismiss(toastId);
         toast.success('Ação atualizada!');
         setEditingId(null);
       },
-      onError: () => toast.error('Erro ao atualizar.'),
+      onError: () => {
+        toast.dismiss(toastId);
+        toast.error('Erro ao atualizar.');
+      },
     });
   };
 
   const handleDestroy = (id) => {
     if (!confirm('Remover esta ação complementar do registro? O RDO não será excluído.')) return;
+    const toastId = toast.loading('Removendo ação...');
     router.delete(route('acoes-complementares.destroy', id), {
-      onSuccess: () => toast.success('Ação removida.'),
+      onSuccess: () => {
+        toast.dismiss(toastId);
+        toast.success('Ação removida.');
+      },
+      onError: () => {
+        toast.dismiss(toastId);
+        toast.error('Erro ao remover.');
+      }
     });
   };
 
