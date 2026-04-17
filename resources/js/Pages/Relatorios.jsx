@@ -24,6 +24,9 @@ import {
   SelectTrigger
 } from '@/Components/ui/select';
 import { motion } from 'framer-motion';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+import { toast } from 'sonner';
 
 export default function Relatorios({ registros, obras, usuarios, statusOpcoes, auth, filters: initialFilters }) {
   const [filters, setFilters] = useState({
@@ -33,6 +36,8 @@ export default function Relatorios({ registros, obras, usuarios, statusOpcoes, a
     data_fim: initialFilters.data_fim || '',
     status: initialFilters.status || ''
   });
+  const [isExporting, setIsExporting] = useState(false);
+  const reportRef = useRef(null);
 
   const handleFilterChange = (key, value) => {
     const newFilters = { ...filters, [key]: value === 'all' ? '' : value };
@@ -46,8 +51,63 @@ export default function Relatorios({ registros, obras, usuarios, statusOpcoes, a
     });
   };
 
-  const handleExport = () => {
-    window.print();
+  const handleExport = async () => {
+    if (!reportRef.current || registros.length === 0) {
+      toast.error('Gere um relatório com registros primeiro.');
+      return;
+    }
+
+    setIsExporting(true);
+    const toastId = toast.loading('Gerando PDF... Aguarde.');
+
+    try {
+      const element = reportRef.current;
+      const canvas = await html2canvas(element, {
+        scale: 2, // Higher quality
+        useCORS: true, // Crucial for external images (S3/Cloudinary)
+        logging: false,
+        windowWidth: 1200, // Fixed width for consistent layout
+        ignoreElements: (el) => el.classList.contains('no-export')
+      });
+
+      const imgData = canvas.toDataURL('image/jpeg', 0.8);
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+      const imgWidth = canvas.width;
+      const imgHeight = canvas.height;
+      
+      const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+      const imgFinalWidth = imgWidth * ratio;
+      const imgFinalHeight = imgHeight * ratio;
+      
+      // Handle multi-page if necessary
+      let heightLeft = imgFinalHeight;
+      let position = 0;
+
+      pdf.addImage(imgData, 'JPEG', 0, position, imgFinalWidth, imgFinalHeight);
+      heightLeft -= pdfHeight;
+
+      while (heightLeft >= 0) {
+        position = heightLeft - imgFinalHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, 'JPEG', 0, position, imgFinalWidth, imgFinalHeight);
+        heightLeft -= pdfHeight;
+      }
+
+      const fileName = `Relatorio-ConstruControl-${new Date().toISOString().split('T')[0]}.pdf`;
+      pdf.save(fileName);
+      
+      toast.dismiss(toastId);
+      toast.success('Relatório exportado com sucesso!');
+    } catch (error) {
+      console.error('PDF Export Error:', error);
+      toast.dismiss(toastId);
+      toast.error('Erro ao gerar PDF. Tente novamente.');
+    } finally {
+      setIsExporting(false);
+    }
   };
 
   return (
@@ -90,8 +150,19 @@ export default function Relatorios({ registros, obras, usuarios, statusOpcoes, a
             </motion.div>
             
             <div className="flex items-center gap-3">
-              <Button onClick={handleExport} variant="outline" className="rounded-xl font-black uppercase tracking-widest text-[10px] h-11 px-6 border-slate-200 bg-white hover:bg-blue-50 hover:text-blue-600 transition-all border-2">
-                <Download size={16} className="mr-2" /> Exportar PDF
+              <Button 
+                onClick={handleExport} 
+                disabled={isExporting || registros.length === 0}
+                variant="outline" 
+                className="rounded-xl font-black uppercase tracking-widest text-[10px] h-11 px-6 border-slate-200 bg-white hover:bg-blue-50 hover:text-blue-600 transition-all border-2 disabled:opacity-50"
+              >
+                {isExporting ? (
+                  <>Gerando...</>
+                ) : (
+                  <>
+                    <Download size={16} className="mr-2" /> Exportar PDF
+                  </>
+                )}
               </Button>
             </div>
           </div>
@@ -182,7 +253,7 @@ export default function Relatorios({ registros, obras, usuarios, statusOpcoes, a
             </CardContent>
           </Card>
 
-          <div className="space-y-12">
+          <div className="space-y-12" ref={reportRef}>
             <div className="flex items-center justify-between border-b pb-4">
               <span className="text-xs font-black uppercase tracking-[0.2em] text-slate-400">Total de Registros: {registros.length}</span>
             </div>
