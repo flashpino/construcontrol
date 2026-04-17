@@ -5,8 +5,25 @@ namespace App\Http\Controllers;
 use App\Models\AcaoComplementar;
 use Illuminate\Http\Request;
 
+use Inertia\Inertia;
+use App\Models\Registro;
+
 class AcaoComplementarController extends Controller
 {
+    public function index()
+    {
+        $acoes = AcaoComplementar::all();
+        $registros_com_acoes = Registro::with(['obra', 'usuario', 'fotos'])
+            ->where('acao_complementar', true)
+            ->latest('data')
+            ->get();
+
+        return Inertia::render('AcoesComplementares', [
+            'acoes' => $acoes,
+            'registros_com_acoes' => $registros_com_acoes
+        ]);
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([

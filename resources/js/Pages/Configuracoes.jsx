@@ -10,8 +10,7 @@ import {
   Edit, 
   Save, 
   X,
-  Palette,
-  Lightbulb
+  Palette
 } from 'lucide-react';
 import { Button } from '@/Components/ui/button';
 import { Input } from '@/Components/ui/input';
@@ -20,9 +19,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/Components/ui/tabs';
 import { toast } from 'sonner';
 import { motion, AnimatePresence } from 'framer-motion';
 import Usuarios from './Usuarios';
-import AcoesComplementares from './AcoesComplementares';
 
-export default function Configuracoes({ statusOpcoes, usuarios, acoesComplementares }) {
+export default function Configuracoes({ statusOpcoes, usuarios }) {
   const [isAddingStatus, setIsAddingStatus] = useState(false);
   const [editingStatusId, setEditingStatusId] = useState(null);
   
@@ -107,12 +105,6 @@ export default function Configuracoes({ statusOpcoes, usuarios, acoesComplementa
                 className="rounded-xl px-8 font-black uppercase tracking-widest text-[10px] h-12"
               >
                 <Tag size={14} className="mr-2" /> Status de Registros
-              </TabsTrigger>
-              <TabsTrigger 
-                value="acoes" 
-                className="rounded-xl px-8 font-black uppercase tracking-widest text-[10px] h-12"
-              >
-                <Lightbulb size={14} className="mr-2" /> Ações Compl.
               </TabsTrigger>
             </TabsList>
 
@@ -285,10 +277,6 @@ export default function Configuracoes({ statusOpcoes, usuarios, acoesComplementa
                   </div>
                 </CardContent>
               </Card>
-            </TabsContent>
-
-            <TabsContent value="acoes">
-              <AcoesComplementares acoes={acoesComplementares} />
             </TabsContent>
           </Tabs>
         </div>

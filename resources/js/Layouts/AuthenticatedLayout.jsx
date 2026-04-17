@@ -51,6 +51,13 @@ export default function AuthenticatedLayout({ header, children }) {
                                             Obras
                                         </NavLink>
                                         <NavLink
+                                            href={route('acoes-complementares.index')}
+                                            active={route().current('acoes-complementares.*')}
+                                            prefetch
+                                        >
+                                            Ações Compl.
+                                        </NavLink>
+                                        <NavLink
                                             href={route('configuracoes.index')}
                                             active={route().current('configuracoes.*')}
                                             prefetch
@@ -171,6 +178,12 @@ export default function AuthenticatedLayout({ header, children }) {
                                     active={route().current('obras.*')}
                                 >
                                     Obras
+                                </ResponsiveNavLink>
+                                <ResponsiveNavLink
+                                    href={route('acoes-complementares.index')}
+                                    active={route().current('acoes-complementares.*')}
+                                >
+                                    Ações Compl.
                                 </ResponsiveNavLink>
                                 <ResponsiveNavLink
                                     href={route('configuracoes.index')}
