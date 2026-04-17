@@ -42,7 +42,8 @@ class RegistroController extends Controller
     {
         return Inertia::render('NovoRegistro', [
             'obras' => Obra::where('status', 'ativa')->get(),
-            'statusOpcoes' => StatusOpcao::all()
+            'statusOpcoes' => StatusOpcao::all(),
+            'acoesComplementares' => \App\Models\AcaoComplementar::where('status', 'ativa')->get()
         ]);
     }
 
@@ -57,7 +58,8 @@ class RegistroController extends Controller
         return Inertia::render('NovoRegistro', [
             'registro' => $registro,
             'obras' => Obra::all(),
-            'statusOpcoes' => StatusOpcao::all()
+            'statusOpcoes' => StatusOpcao::all(),
+            'acoesComplementares' => \App\Models\AcaoComplementar::where('status', 'ativa')->get()
         ]);
     }
 
@@ -162,6 +164,11 @@ class RegistroController extends Controller
 
     public function relatorios(Request $request)
     {
+        // Apenas admin acessa relatórios
+        if (auth()->user()->role !== 'admin') {
+            return redirect()->route('registros.index')->with('error', 'Acesso negado.');
+        }
+
         $query = Registro::with(['obra', 'usuario', 'fotos']);
         
         if (auth()->user()->role !== 'admin') {

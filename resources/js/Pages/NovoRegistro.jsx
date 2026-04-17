@@ -35,7 +35,7 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
 
-export default function NovoRegistro({ registro, obras, statusOpcoes }) {
+export default function NovoRegistro({ registro, obras, statusOpcoes, acoesComplementares }) {
   const isEditing = !!registro;
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [previews, setPreviews] = useState([]);
@@ -319,13 +319,16 @@ export default function NovoRegistro({ registro, obras, statusOpcoes }) {
                         className="space-y-2 overflow-hidden"
                       >
                         <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Descrição da Ação Tomada</label>
-                        <Textarea 
-                          placeholder="Descreva qual foi a ação tomada..." 
-                          value={data.descricao_acao_complementar}
-                          onChange={(e) => setData('descricao_acao_complementar', e.target.value)}
-                          required
-                          className="min-h-[100px] rounded-3xl border-slate-200 bg-slate-50 p-6 font-medium"
-                        />
+                        <Select value={data.descricao_acao_complementar} onValueChange={(v) => setData('descricao_acao_complementar', v)}>
+                          <SelectTrigger className="h-14 rounded-2xl border-slate-200 bg-white font-bold mt-2">
+                            {data.descricao_acao_complementar || 'Selecione a ação'}
+                          </SelectTrigger>
+                          <SelectContent>
+                            {acoesComplementares?.map(acao => (
+                              <SelectItem key={acao.id} value={acao.nome}>{acao.nome}</SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -382,7 +385,14 @@ export default function NovoRegistro({ registro, obras, statusOpcoes }) {
                       <label className="aspect-square rounded-3xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center gap-3 cursor-pointer hover:bg-slate-50 hover:border-amber-500 hover:text-amber-500 transition-all text-slate-400 group">
                         <Camera size={20} />
                         <span className="text-[10px] font-black uppercase tracking-widest text-center px-2">Adicionar Fotos</span>
-                        <input type="file" multiple accept="image/*" className="hidden" onChange={handleFileChange} />
+                        <input 
+                          type="file" 
+                          multiple 
+                          accept="image/*" 
+                          capture="environment"
+                          className="hidden" 
+                          onChange={handleFileChange} 
+                        />
                       </label>
                     </div>
                   </div>

@@ -25,26 +25,21 @@ export default function AuthenticatedLayout({ header, children }) {
 
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink
-                                    href={route('dashboard')}
-                                    active={route().current('dashboard')}
-                                    prefetch
-                                >
-                                    Dashboard
-                                </NavLink>
-                                <NavLink
                                     href={route('registros.index')}
                                     active={route().current('registros.index')}
                                     prefetch
                                 >
                                     RDO
                                 </NavLink>
-                                <NavLink
-                                    href={route('registros.relatorios')}
-                                    active={route().current('registros.relatorios')}
-                                    prefetch
-                                >
-                                    Relatórios
-                                </NavLink>
+                                {auth.user.role === 'admin' && (
+                                    <NavLink
+                                        href={route('registros.relatorios')}
+                                        active={route().current('registros.relatorios')}
+                                        prefetch
+                                    >
+                                        Relatórios
+                                    </NavLink>
+                                )}
                                 
                                 {user.role === 'admin' && (
                                     <>
@@ -163,12 +158,6 @@ export default function AuthenticatedLayout({ header, children }) {
                 >
                     <div className="space-y-1 pb-3 pt-2">
                         <ResponsiveNavLink
-                            href={route('dashboard')}
-                            active={route().current('dashboard')}
-                        >
-                            Dashboard
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink
                             href={route('registros.index')}
                             active={route().current('registros.*')}
                         >
@@ -207,9 +196,11 @@ export default function AuthenticatedLayout({ header, children }) {
                             <ResponsiveNavLink href={route('registros.index')} active={route().current('registros.index')}>
                         RDO
                     </ResponsiveNavLink>
-                    <ResponsiveNavLink href={route('registros.relatorios')} active={route().current('registros.relatorios')}>
-                        Relatórios
-                    </ResponsiveNavLink>
+                    {user.role === 'admin' && (
+                        <ResponsiveNavLink href={route('registros.relatorios')} active={route().current('registros.relatorios')}>
+                            Relatórios
+                        </ResponsiveNavLink>
+                    )}
                             <ResponsiveNavLink href={route('profile.edit')}>
                                 Profile
                             </ResponsiveNavLink>

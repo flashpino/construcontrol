@@ -12,7 +12,8 @@ class ConfiguracoesController extends Controller
     {
         return Inertia::render('Configuracoes', [
             'statusOpcoes' => StatusOpcao::all(),
-            'usuarios' => User::all()
+            'usuarios' => User::all(),
+            'acoesComplementares' => \App\Models\AcaoComplementar::all()
         ]);
     }
 }

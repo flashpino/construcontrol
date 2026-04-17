@@ -9,11 +9,13 @@ use App\Http\Controllers\ConfiguracoesController;
 use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
-    return redirect()->route('dashboard');
+    return redirect()->route('registros.index');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', function () {
+        return redirect()->route('registros.index');
+    })->name('dashboard');
     
     Route::resource('obras', ObraController::class);
     Route::get('registros/relatorios', [RegistroController::class, 'relatorios'])->name('registros.relatorios');
@@ -24,6 +26,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('users', UserController::class);
         Route::resource('status-opcoes', StatusOpcaoController::class)->parameters([
             'status-opcoes' => 'statusOpcao'
+        ]);
+        Route::resource('acoes-complementares', \App\Http\Controllers\AcaoComplementarController::class)->parameters([
+            'acoes-complementares' => 'acao_complementare'
         ]);
     });
     
