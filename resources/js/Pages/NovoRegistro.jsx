@@ -147,12 +147,10 @@ export default function NovoRegistro({ registro, obras, statusOpcoes }) {
     post(url, {
       onSuccess: () => {
         toast.dismiss(toastId);
-        toast.success(isEditing ? 'Registro atualizado!' : 'Registro salvo!');
       },
       onError: (err) => {
         toast.dismiss(toastId);
         console.error(err);
-        toast.error('Erro ao salvar registro. Verifique os campos.');
       }
     });
   };
@@ -160,7 +158,6 @@ export default function NovoRegistro({ registro, obras, statusOpcoes }) {
   const handleDelete = () => {
     router.delete(route('registros.destroy', registro.id), {
       onSuccess: () => {
-        toast.success('Registro excluído');
         setShowDeleteDialog(false);
       }
     });

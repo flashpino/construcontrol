@@ -52,7 +52,6 @@ export default function Obras({ obras }) {
           setIsDialogOpen(false);
           setEditingObra(null);
           reset();
-          toast.success('Obra atualizada com sucesso');
         },
       });
     } else {
@@ -60,7 +59,6 @@ export default function Obras({ obras }) {
         onSuccess: () => {
           setIsDialogOpen(false);
           reset();
-          toast.success('Obra criada com sucesso');
         },
       });
     }
@@ -68,9 +66,7 @@ export default function Obras({ obras }) {
 
   const handleDelete = (id) => {
     if (!confirm('Tem certeza que deseja excluir esta obra?')) return;
-    router.delete(route('obras.destroy', id), {
-      onSuccess: () => toast.success('Obra excluída'),
-    });
+    router.delete(route('obras.destroy', id));
   };
 
   const openEdit = (obra) => {

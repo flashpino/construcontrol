@@ -38,7 +38,6 @@ export default function Configuracoes({ statusOpcoes, usuarios }) {
     e.preventDefault();
     addStatusForm.post(route('status-opcoes.store'), {
       onSuccess: () => {
-        toast.success('Status criado');
         addStatusForm.reset();
         setIsAddingStatus(false);
       }
@@ -48,7 +47,6 @@ export default function Configuracoes({ statusOpcoes, usuarios }) {
   const handleUpdateStatus = (id) => {
     editStatusForm.put(route('status-opcoes.update', id), {
       onSuccess: () => {
-        toast.success('Status atualizado');
         setEditingStatusId(null);
       }
     });
@@ -56,9 +54,7 @@ export default function Configuracoes({ statusOpcoes, usuarios }) {
 
   const handleDeleteStatus = (id) => {
     if (!confirm('Excluir este status?')) return;
-    router.delete(route('status-opcoes.destroy', id), {
-      onSuccess: () => toast.success('Status excluído')
-    });
+    router.delete(route('status-opcoes.destroy', id));
   };
 
   const startEditing = (status) => {

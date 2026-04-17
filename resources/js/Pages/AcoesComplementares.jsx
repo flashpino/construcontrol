@@ -55,12 +55,10 @@ export default function AcoesComplementares({ registros_com_acoes }) {
     editForm.put(route('acoes-complementares.update', id), {
       onSuccess: () => {
         toast.dismiss(toastId);
-        toast.success('Ação atualizada!');
         setEditingId(null);
       },
       onError: () => {
         toast.dismiss(toastId);
-        toast.error('Erro ao atualizar.');
       },
     });
   };
@@ -71,11 +69,9 @@ export default function AcoesComplementares({ registros_com_acoes }) {
     router.delete(route('acoes-complementares.destroy', id), {
       onSuccess: () => {
         toast.dismiss(toastId);
-        toast.success('Ação removida.');
       },
       onError: () => {
         toast.dismiss(toastId);
-        toast.error('Erro ao remover.');
       }
     });
   };

@@ -37,7 +37,6 @@ export default function Usuarios({ usuarios }) {
     if (editingUser) {
       put(route('users.update', editingUser.id), {
         onSuccess: () => {
-          toast.success('Usuário atualizado');
           setIsDialogOpen(false);
           reset();
         }
@@ -45,7 +44,6 @@ export default function Usuarios({ usuarios }) {
     } else {
       post(route('users.store'), {
         onSuccess: () => {
-          toast.success('Usuário criado');
           setIsDialogOpen(false);
           reset();
         }
@@ -55,9 +53,7 @@ export default function Usuarios({ usuarios }) {
 
   const handleDelete = (id) => {
     if (!confirm('Excluir este usuário?')) return;
-    router.delete(route('users.destroy', id), {
-      onSuccess: () => toast.success('Usuário excluído')
-    });
+    router.delete(route('users.destroy', id));
   };
 
   const openEdit = (user) => {
