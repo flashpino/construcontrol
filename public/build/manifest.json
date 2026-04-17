@@ -231,7 +231,7 @@
     ]
   },
   "resources/js/Pages/AcoesComplementares.jsx": {
-    "file": "assets/AcoesComplementares-B9tkwZSe.js",
+    "file": "assets/AcoesComplementares-CpAWuV6w.js",
     "name": "AcoesComplementares",
     "src": "resources/js/Pages/AcoesComplementares.jsx",
     "isDynamicEntry": true,
@@ -522,7 +522,7 @@
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-WIzRSUsl.js",
+    "file": "assets/app-CzIkLTX1.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
@@ -551,7 +551,7 @@
       "resources/js/Pages/Welcome.jsx"
     ],
     "css": [
-      "assets/app-BBRizGiN.css"
+      "assets/app-BU4tb-QT.css"
     ]
   }
 }

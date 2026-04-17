@@ -43,7 +43,6 @@ class RegistroController extends Controller
         return Inertia::render('NovoRegistro', [
             'obras' => Obra::where('status', 'ativa')->get(),
             'statusOpcoes' => StatusOpcao::all(),
-            'acoesComplementares' => \App\Models\AcaoComplementar::where('status', 'ativa')->get()
         ]);
     }
 
@@ -59,7 +58,6 @@ class RegistroController extends Controller
             'registro' => $registro,
             'obras' => Obra::all(),
             'statusOpcoes' => StatusOpcao::all(),
-            'acoesComplementares' => \App\Models\AcaoComplementar::where('status', 'ativa')->get()
         ]);
     }
 
@@ -78,6 +76,11 @@ class RegistroController extends Controller
 
         $validated['usuario_id'] = auth()->id();
         $validated['acao_complementar'] = filter_var($request->acao_complementar, FILTER_VALIDATE_BOOLEAN);
+
+        // Se ação complementar foi marcada, inicializa com status 'pendente'
+        if ($validated['acao_complementar']) {
+            $validated['status_acao_complementar'] = 'pendente';
+        }
 
         $registro = Registro::create($validated);
 
@@ -112,6 +115,14 @@ class RegistroController extends Controller
         ]);
 
         $validated['acao_complementar'] = filter_var($request->acao_complementar, FILTER_VALIDATE_BOOLEAN);
+
+        // Se ação foi reativada (voltou a ser marcada) sem status definido, retorna para pendente
+        if ($validated['acao_complementar'] && empty($registro->status_acao_complementar)) {
+            $validated['status_acao_complementar'] = 'pendente';
+        } elseif (!$validated['acao_complementar']) {
+            $validated['status_acao_complementar'] = null;
+            $validated['observacoes_acao_complementar'] = null;
+        }
 
         $registro->update($validated);
 
