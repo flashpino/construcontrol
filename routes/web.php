@@ -25,9 +25,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('status-opcoes', StatusOpcaoController::class)->parameters([
             'status-opcoes' => 'statusOpcao'
         ]);
-        Route::resource('acoes-complementares', \App\Http\Controllers\AcaoComplementarController::class)->parameters([
-            'acoes-complementares' => 'acao_complementare'
-        ]);
+        // Ações Complementares: gerencia registros onde acao_complementar = true
+        Route::get('/acoes-complementares', [\App\Http\Controllers\AcaoComplementarController::class, 'index'])->name('acoes-complementares.index');
+        Route::put('/acoes-complementares/{registro}', [\App\Http\Controllers\AcaoComplementarController::class, 'update'])->name('acoes-complementares.update');
+        Route::delete('/acoes-complementares/{registro}', [\App\Http\Controllers\AcaoComplementarController::class, 'destroy'])->name('acoes-complementares.destroy');
     });
     
     Route::prefix('api')->group(function () {

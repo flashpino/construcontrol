@@ -24,6 +24,15 @@ export default function AuthenticatedLayout({ header, children }) {
                             </div>
 
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                {user.role === 'admin' && (
+                                    <NavLink
+                                        href={route('dashboard')}
+                                        active={route().current('dashboard')}
+                                        prefetch
+                                    >
+                                        Dashboard
+                                    </NavLink>
+                                )}
                                 <NavLink
                                     href={route('registros.index')}
                                     active={route().current('registros.index')}
@@ -32,23 +41,13 @@ export default function AuthenticatedLayout({ header, children }) {
                                     RDO
                                 </NavLink>
                                 {user.role === 'admin' && (
-                                    <NavLink
-                                        href={route('registros.relatorios')}
-                                        active={route().current('registros.relatorios')}
-                                        prefetch
-                                    >
-                                        Relatórios
-                                    </NavLink>
-                                )}
-                                
-                                {user.role === 'admin' && (
                                     <>
                                         <NavLink
-                                            href={route('dashboard')}
-                                            active={route().current('dashboard')}
+                                            href={route('registros.relatorios')}
+                                            active={route().current('registros.relatorios')}
                                             prefetch
                                         >
-                                            Dashboard
+                                            Relatórios
                                         </NavLink>
                                         <NavLink
                                             href={route('obras.index')}
@@ -171,20 +170,27 @@ export default function AuthenticatedLayout({ header, children }) {
                     }
                 >
                     <div className="space-y-1 pb-3 pt-2">
+                        {user.role === 'admin' && (
+                            <ResponsiveNavLink
+                                href={route('dashboard')}
+                                active={route().current('dashboard')}
+                            >
+                                Dashboard
+                            </ResponsiveNavLink>
+                        )}
                         <ResponsiveNavLink
                             href={route('registros.index')}
                             active={route().current('registros.*')}
                         >
                             RDO
                         </ResponsiveNavLink>
-                        
                         {user.role === 'admin' && (
                             <>
                                 <ResponsiveNavLink
-                                    href={route('dashboard')}
-                                    active={route().current('dashboard')}
+                                    href={route('registros.relatorios')}
+                                    active={route().current('registros.relatorios')}
                                 >
-                                    Dashboard
+                                    Relatórios
                                 </ResponsiveNavLink>
                                 <ResponsiveNavLink
                                     href={route('obras.index')}

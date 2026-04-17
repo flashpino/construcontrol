@@ -14,7 +14,9 @@ class Registro extends Model
         'descricao_atividade',
         'problemas_observacoes',
         'acao_complementar',
-        'descricao_acao_complementar'
+        'descricao_acao_complementar',
+        'status_acao_complementar',
+        'observacoes_acao_complementar',
     ];
 
     public function obra()

@@ -17,12 +17,7 @@ import { Button } from '@/Components/ui/button';
 import { Input } from '@/Components/ui/input';
 import { Textarea } from '@/Components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/Components/ui/card';
-import { 
-  Select, 
-  SelectContent, 
-  SelectItem, 
-  SelectTrigger
-} from '@/Components/ui/select';
+
 
 import { 
   Dialog, 
@@ -35,7 +30,7 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
 
-export default function NovoRegistro({ registro, obras, statusOpcoes, acoesComplementares }) {
+export default function NovoRegistro({ registro, obras, statusOpcoes }) {
   const isEditing = !!registro;
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [previews, setPreviews] = useState([]);
@@ -299,42 +294,36 @@ export default function NovoRegistro({ registro, obras, statusOpcoes, acoesCompl
                   </div>
                 </CardHeader>
                 <CardContent className="p-8 space-y-6">
-                  <div 
-                    className="flex items-center space-x-3 p-4 bg-slate-50 rounded-2xl border border-slate-100 cursor-pointer"
+                  <div
+                    className={`flex items-center gap-4 p-4 rounded-2xl border cursor-pointer transition-all select-none ${data.acao_complementar ? 'bg-emerald-50 border-emerald-200' : 'bg-slate-50 border-slate-100'}`}
                     onClick={() => setData('acao_complementar', !data.acao_complementar)}
                   >
-                    <input
-                      type="checkbox"
-                      id="acao"
-                      checked={!!data.acao_complementar}
-                      onChange={(e) => setData('acao_complementar', e.target.checked)}
-                      className="h-5 w-5 rounded accent-amber-500 cursor-pointer shrink-0"
-                      onClick={(e) => e.stopPropagation()}
-                    />
-                    <label htmlFor="acao" className="text-xs font-black uppercase tracking-widest text-slate-700 cursor-pointer flex-1">
+                    <div className={`relative w-11 h-6 rounded-full transition-colors shrink-0 ${data.acao_complementar ? 'bg-emerald-500' : 'bg-slate-300'}`}>
+                      <div className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow-md transition-transform duration-200 ${data.acao_complementar ? 'translate-x-5' : 'translate-x-0'}`} />
+                    </div>
+                    <span className="text-xs font-black uppercase tracking-widest text-slate-700 flex-1">
                       Houve necessidade de ação complementar?
-                    </label>
+                    </span>
+                    <span className={`text-[10px] font-black uppercase tracking-widest shrink-0 ${data.acao_complementar ? 'text-emerald-600' : 'text-slate-400'}`}>
+                      {data.acao_complementar ? 'Sim' : 'Não'}
+                    </span>
                   </div>
 
                   <AnimatePresence>
                     {data.acao_complementar && (
-                      <motion.div 
+                      <motion.div
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
                         className="space-y-2 overflow-hidden"
                       >
                         <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Descrição da Ação Tomada</label>
-                        <Select value={data.descricao_acao_complementar} onValueChange={(v) => setData('descricao_acao_complementar', v)}>
-                          <SelectTrigger className="h-14 rounded-2xl border-slate-200 bg-white font-bold mt-2">
-                            {data.descricao_acao_complementar || 'Selecione a ação'}
-                          </SelectTrigger>
-                          <SelectContent>
-                            {acoesComplementares?.map(acao => (
-                              <SelectItem key={acao.id} value={acao.nome}>{acao.nome}</SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
+                        <Textarea
+                          placeholder="Descreva a ação complementar realizada..."
+                          className="min-h-[100px] rounded-3xl border-slate-200 bg-slate-50 p-5 font-medium mt-1"
+                          value={data.descricao_acao_complementar}
+                          onChange={(e) => setData('descricao_acao_complementar', e.target.value)}
+                        />
                       </motion.div>
                     )}
                   </AnimatePresence>

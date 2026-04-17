@@ -2,55 +2,45 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AcaoComplementar;
-use Illuminate\Http\Request;
-
-use Inertia\Inertia;
 use App\Models\Registro;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class AcaoComplementarController extends Controller
 {
     public function index()
     {
-        $acoes = AcaoComplementar::all();
-        $registros_com_acoes = Registro::with(['obra', 'usuario', 'fotos'])
+        $registros = Registro::with(['obra', 'usuario'])
             ->where('acao_complementar', true)
             ->latest('data')
             ->get();
 
         return Inertia::render('AcoesComplementares', [
-            'acoes' => $acoes,
-            'registros_com_acoes' => $registros_com_acoes
+            'registros_com_acoes' => $registros
         ]);
     }
 
-    public function store(Request $request)
+    public function update(Request $request, Registro $registro)
     {
         $validated = $request->validate([
-            'nome' => 'required|string|max:255',
-            'status' => 'required|in:ativa,inativa'
+            'status_acao_complementar' => 'nullable|string|max:100',
+            'observacoes_acao_complementar' => 'nullable|string',
         ]);
 
-        AcaoComplementar::create($validated);
+        $registro->update($validated);
 
-        return redirect()->back()->with('success', 'Ação complementar cadastrada com sucesso!');
+        return redirect()->back()->with('success', 'Ação complementar atualizada!');
     }
 
-    public function update(Request $request, AcaoComplementar $acao_complementare)
+    public function destroy(Registro $registro)
     {
-        $validated = $request->validate([
-            'nome' => 'required|string|max:255',
-            'status' => 'required|in:ativa,inativa'
+        $registro->update([
+            'acao_complementar' => false,
+            'descricao_acao_complementar' => null,
+            'status_acao_complementar' => null,
+            'observacoes_acao_complementar' => null,
         ]);
 
-        $acao_complementare->update($validated);
-
-        return redirect()->back()->with('success', 'Ação complementar atualizada com sucesso!');
-    }
-
-    public function destroy(AcaoComplementar $acao_complementare)
-    {
-        $acao_complementare->delete();
-        return redirect()->back()->with('success', 'Ação complementar removida!');
+        return redirect()->back()->with('success', 'Ação complementar removida.');
     }
 }
