@@ -129,30 +129,32 @@ export default function Dashboard({ dashboardData, period }) {
               <CardHeader className="bg-slate-50/50 border-b border-slate-100 py-4 px-6">
                 <CardTitle className="text-xs font-black uppercase tracking-widest text-slate-900">RDOs por Status</CardTitle>
               </CardHeader>
-              <CardContent className="h-[320px] pt-6">
-                <ResponsiveContainer width="100%" height="100%">
-                  <PieChart>
-                    <Pie
-                      data={dashboardData.registrosPorStatus}
-                      cx="50%"
-                      cy="50%"
-                      innerRadius={70}
-                      outerRadius={95}
-                      paddingAngle={5}
-                      dataKey="count"
-                      nameKey="status"
-                      stroke="none"
-                    >
-                      {dashboardData.registrosPorStatus.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                      ))}
-                    </Pie>
-                    <Tooltip 
-                      contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)', fontSize: '10px', fontWeight: 'bold', textTransform: 'uppercase' }}
-                    />
-                    <Legend iconType="circle" wrapperStyle={{ fontSize: '10px', fontWeight: 'bold', textTransform: 'uppercase', paddingTop: '20px' }} />
-                  </PieChart>
-                </ResponsiveContainer>
+              <CardContent className="pt-6">
+                <div style={{ width: '100%', height: 320 }}>
+                  <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                      <Pie
+                        data={dashboardData.registrosPorStatus}
+                        cx="50%"
+                        cy="50%"
+                        innerRadius={70}
+                        outerRadius={95}
+                        paddingAngle={5}
+                        dataKey="count"
+                        nameKey="status"
+                        stroke="none"
+                      >
+                        {dashboardData.registrosPorStatus.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                        ))}
+                      </Pie>
+                      <Tooltip 
+                        contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)', fontSize: '10px', fontWeight: 'bold', textTransform: 'uppercase' }}
+                      />
+                      <Legend iconType="circle" wrapperStyle={{ fontSize: '10px', fontWeight: 'bold', textTransform: 'uppercase', paddingTop: '20px' }} />
+                    </PieChart>
+                  </ResponsiveContainer>
+                </div>
               </CardContent>
             </Card>
 
@@ -160,19 +162,21 @@ export default function Dashboard({ dashboardData, period }) {
               <CardHeader className="bg-slate-50/50 border-b border-slate-100 py-4 px-6">
                 <CardTitle className="text-xs font-black uppercase tracking-widest text-slate-900">Obras mais Ativas</CardTitle>
               </CardHeader>
-              <CardContent className="h-[320px] pt-8">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={dashboardData.obrasMaisAtivas} layout="vertical" margin={{ left: 20, right: 30 }}>
-                    <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} stroke="#f1f5f9" />
-                    <XAxis type="number" hide />
-                    <YAxis dataKey="titulo_da_obra" type="category" width={140} fontSize={10} fontWeight="900" tick={{ fill: '#64748b' }} axisLine={false} tickLine={false} />
-                    <Tooltip 
-                      cursor={{ fill: '#f8fafc' }}
-                      contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)', fontSize: '10px', fontWeight: 'bold', textTransform: 'uppercase' }}
-                    />
-                    <Bar dataKey="count" fill="#f59e0b" radius={[0, 8, 8, 0]} barSize={24} />
-                  </BarChart>
-                </ResponsiveContainer>
+              <CardContent className="pt-8">
+                <div style={{ width: '100%', height: 320 }}>
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart data={dashboardData.obrasMaisAtivas} layout="vertical" margin={{ left: 20, right: 30 }}>
+                      <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} stroke="#f1f5f9" />
+                      <XAxis type="number" hide />
+                      <YAxis dataKey="titulo_da_obra" type="category" width={140} fontSize={10} fontWeight="900" tick={{ fill: '#64748b' }} axisLine={false} tickLine={false} />
+                      <Tooltip 
+                        cursor={{ fill: '#f8fafc' }}
+                        contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)', fontSize: '10px', fontWeight: 'bold', textTransform: 'uppercase' }}
+                      />
+                      <Bar dataKey="count" fill="#f59e0b" radius={[0, 8, 8, 0]} barSize={24} />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
               </CardContent>
             </Card>
           </div>
